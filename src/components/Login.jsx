@@ -8,7 +8,6 @@ const Login = () => {
     e.preventDefault();
     console.log('Email:', email);
     console.log('Password:', password);
-    // For now, just log the values. Authentication will be added later.
   };
 
   return (
