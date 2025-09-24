@@ -2,13 +2,12 @@
 import React from "react";
 import Tourguide from "./components/Tourguide";
 
-const App = () => {
+const Test = () => {
   return (
     <div>
-      <Tourguide />
-      <a href="./Route.jsx">link text</a>
+      hoi
     </div>
   );
 };
 
-export default App;
+export default Test;

@@ -1,0 +1,14 @@
+mutation SeedData @auth(level: USER) {
+  user_insertMany(data: [
+    {
+      email: "test1@example.com",
+      displayName: "Test User 1",
+      createdAt_expr: "request.time"
+    },
+    {
+      email: "test2@example.com",
+      displayName: "Test User 2",
+      createdAt_expr: "request.time"
+    }
+  ])
+}
