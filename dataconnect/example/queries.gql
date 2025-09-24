@@ -1,0 +1,35 @@
+mutation CreateCategory @auth(level: USER) {
+  category_insert(data: {
+    name: "Groceries",
+    budgetLimit: 500.0,
+    createdAt_expr: "request.time",
+    userId_expr: "auth.uid"
+  })
+}
+
+query ListExpenses @auth(level: USER) {
+  expenses(where: {userId_expr: "auth.uid"}) {
+    id
+    amount
+    description
+    transactionDate
+    category {
+      name
+    }
+  }
+}
+
+mutation UpdateExpense($expenseId: UUID!, $amount: Float, $description: String, $transactionDate: Date) @auth(level: USER) {
+  expense_update(
+    id: $expenseId,
+    data: {
+      amount: $amount,
+      description: $description,
+      transactionDate: $transactionDate
+    }
+  )
+}
+
+mutation DeleteExpense($expenseId: UUID!) @auth(level: USER) {
+  expense_delete(id: $expenseId)
+}
