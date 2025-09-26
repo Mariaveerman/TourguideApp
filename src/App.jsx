@@ -1,5 +1,8 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
+import Location from "./pages/location";
+
 
 const App = () => {
   return (
@@ -9,7 +12,16 @@ const App = () => {
       width: '100vw',
       position: 'relative'
     }}>
-      <Login />
+       <Router>
+      <Routes>
+      <Route path="/Login" element={<Login />} />
+      </Routes>
+          </Router>
+          <Router>
+      <Routes>
+      <Route path="/locatie" element={<Location />} />
+      </Routes>
+          </Router>
     </div>
   );
 };
