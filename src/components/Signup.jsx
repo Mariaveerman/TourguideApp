@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 
-const Login = ({ onToggle, onLoginSuccess }) => {
+const Signup = ({ onToggle, onSignupSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
     setError('');
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      onLoginSuccess();
+      await createUserWithEmailAndPassword(auth, email, password);
+      onSignupSuccess();
     } catch (error) {
       setError(error.message);
     }
@@ -39,7 +44,7 @@ const Login = ({ onToggle, onLoginSuccess }) => {
         fontSize: '24px',
         fontWeight: 'bold'
       }}>
-        Welcome Back
+        Create Account
       </h2>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '20px' }}>
@@ -92,6 +97,31 @@ const Login = ({ onToggle, onLoginSuccess }) => {
             }}
           />
         </div>
+        <div style={{ marginBottom: '20px' }}>
+          <label htmlFor="confirmPassword" style={{
+            display: 'block',
+            marginBottom: '5px',
+            color: '#555',
+            fontSize: '14px'
+          }}>
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            style={{
+              width: '100%',
+              padding: '12px',
+              border: '1px solid #ddd',
+              borderRadius: '5px',
+              fontSize: '16px',
+              boxSizing: 'border-box'
+            }}
+          />
+        </div>
         {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
         <button type="submit" style={{
           width: '100%',
@@ -104,7 +134,7 @@ const Login = ({ onToggle, onLoginSuccess }) => {
           cursor: 'pointer',
           transition: 'background 0.3s'
         }}>
-          Login
+          Sign Up
         </button>
       </form>
       <p style={{
@@ -112,10 +142,10 @@ const Login = ({ onToggle, onLoginSuccess }) => {
         color: '#777',
         fontSize: '14px'
       }}>
-        Don't have an account? <a href="#" onClick={onToggle} style={{ color: '#667eea', textDecoration: 'none', cursor: 'pointer' }}>Sign up</a>
+        Already have an account? <a href="#" onClick={onToggle} style={{ color: '#667eea', textDecoration: 'none', cursor: 'pointer' }}>Login</a>
       </p>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

@@ -1,6 +1,8 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // ✅ hier importeer je Firestore
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA7WCPQxeR-rG7SJ_eda27B9S_6DKqHgXY",
@@ -15,5 +17,7 @@ const firebaseConfig = {
 // Firebase initialiseren
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+const storage = getStorage(app);
 
-export { db }; // ✅ exporteer db zodat je het in componenten kunt gebruiken
+export { db, auth, storage };
