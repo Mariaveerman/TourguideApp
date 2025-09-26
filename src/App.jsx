@@ -4,11 +4,13 @@ import { auth } from "./firebase";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Tourguide from "./components/Tourguide";
+import Profile from "./components/Profile";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currentView, setCurrentView] = useState('tourguide');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -35,7 +37,11 @@ const App = () => {
   }
 
   if (user) {
-    return <Tourguide onLogout={() => setUser(null)} />;
+    if (currentView === 'tourguide') {
+      return <Tourguide onLogout={() => setUser(null)} onGoToProfile={() => setCurrentView('profile')} />;
+    } else if (currentView === 'profile') {
+      return <Profile user={user} onLogout={() => setUser(null)} onBackToTourguide={() => setCurrentView('tourguide')} />;
+    }
   }
 
   return (

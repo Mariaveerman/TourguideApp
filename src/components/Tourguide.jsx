@@ -3,7 +3,7 @@ import { db, auth } from "../firebase"; // 🔗 importeer de db en auth uit fire
 import { collection, addDoc } from "firebase/firestore"; // ✅ importeer functies die je nodig hebt
 import { signOut } from "firebase/auth"; // ✅ importeer signOut voor logout
 
-const Tourguide = ({ onLogout }) => {
+const Tourguide = ({ onLogout, onGoToProfile }) => {
   const handleSave = async () => {
     try {
       await addDoc(collection(db, "Tourguide"), {
@@ -28,6 +28,20 @@ const Tourguide = ({ onLogout }) => {
 
   return (
     <div style={{ padding: '20px', textAlign: 'center', position: 'relative' }}>
+      <button onClick={onGoToProfile} style={{
+        position: 'absolute',
+        top: '10px',
+        right: '120px',
+        padding: '10px 15px',
+        backgroundColor: '#007bff',
+        color: 'white',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        fontSize: '16px'
+      }}>
+        👤
+      </button>
       <button onClick={handleLogout} style={{
         position: 'absolute',
         top: '10px',
