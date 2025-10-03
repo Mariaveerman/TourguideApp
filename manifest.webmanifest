@@ -1,0 +1,1 @@
+{"name":"Mijn React PWA","short_name":"MijnApp","start_url":".","display":"standalone","background_color":"#ffffff","theme_color":"#000000","lang":"en","scope":"/","icons":[{"src":"icons/quastion.png","sizes":"512x512","type":"image/png"},{"src":"icons/quastion.png","sizes":"512x512","type":"image/png"}]}
