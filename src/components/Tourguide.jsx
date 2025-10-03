@@ -2,6 +2,7 @@ import React from "react";
 import { db, auth } from "../firebase"; // 🔗 importeer de db en auth uit firebase.js
 import { collection, addDoc } from "firebase/firestore"; // ✅ importeer functies die je nodig hebt
 import { signOut } from "firebase/auth"; // ✅ importeer signOut voor logout
+import GPS from "./GPS";
 
 const Tourguide = ({ onLogout, onGoToProfile }) => {
   const handleSave = async () => {
@@ -27,36 +28,33 @@ const Tourguide = ({ onLogout, onGoToProfile }) => {
   };
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center', position: 'relative' }}>
-      <button onClick={onGoToProfile} style={{
-        position: 'absolute',
-        top: '10px',
-        right: '120px',
-        padding: '10px 15px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        fontSize: '16px'
-      }}>
-        👤
-      </button>
-      <button onClick={handleLogout} style={{
-        position: 'absolute',
-        top: '10px',
-        right: '10px',
-        padding: '10px 20px',
-        backgroundColor: '#ff4444',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer'
-      }}>
-        Logout
-      </button>
+    <div style={{ padding: '20px', textAlign: 'center', position: 'relative', minHeight: '100vh' }}>
+      <div style={{ position: 'absolute', top: '10px', right: '10px', display: 'flex', gap: '10px' }}>
+        <button onClick={onGoToProfile} style={{
+          padding: '10px 15px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          fontSize: '16px'
+        }}>
+          👤
+        </button>
+        <button onClick={handleLogout} style={{
+          padding: '10px 20px',
+          backgroundColor: '#ff4444',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer'
+        }}>
+          Logout
+        </button>
+      </div>
       <h1>Welcome to Tourguide App!</h1>
       <p>You are logged in!</p>
+      <GPS />
       <button onClick={handleSave} style={{ marginRight: '10px', padding: '10px 20px' }}>
         Save Data
       </button>
