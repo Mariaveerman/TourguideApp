@@ -1,4 +1,4 @@
-// src/App.jsx
+// src/App.js
 import React from "react";
 import Tourguide from "./components/Tourguide";
 
